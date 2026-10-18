@@ -1,0 +1,53 @@
+{
+  "name": "JM 2K20 Science — Design Tokens v2",
+  "version": "1.0",
+  "description": "Warm Iftar at Dusk — Mobile-first, Bangla-friendly",
+  "colors": {
+    "ink": "#16233A",
+    "ink2": "#1F2F4A",
+    "paper": "#FFF8E7",
+    "paper2": "#F1E8D6",
+    "paper3": "#E9DCC0",
+    "gold": "#E8A838",
+    "gold2": "#F0C06D",
+    "gold3": "#B27C33",
+    "sage": "#2D6A4F",
+    "sage2": "#40916C",
+    "rose": "#AD5C46",
+    "rose2": "#D98D7C",
+    "line": "rgba(22,35,58,0.12)",
+    "success": "#2D6A4F",
+    "pending": "#E8A838",
+    "danger": "#AD5C46",
+    "text": "#16233A",
+    "muted": "#5A6A83"
+  },
+  "typography": {
+    "headingFont": "Tiro Bangla",
+    "bodyFont": "Hind Siliguri",
+    "numberFont": "Baloo Da 2",
+    "scale": {
+      "xs": "11px", "sm": "12.5px", "base": "14px", "lg": "16px", "xl": "20px", "2xl": "26px", "3xl": "34px"
+    }
+  },
+  "radius": {
+    "sm": "8px", "md": "12px", "lg": "16px", "xl": "20px", "full": "999px"
+  },
+  "shadows": {
+    "card": "0 4px 20px rgba(22,35,58,0.06)",
+    "elevated": "0 12px 32px rgba(22,35,58,0.12)"
+  },
+  "spacing": { "xs": "6px", "sm": "10px", "md": "16px", "lg": "24px", "xl": "36px" },
+  "components": {
+    "buttonPrimary": { "bg": "#16233A", "color": "#FFF8E7", "radius": "12px", "height": "48px", "fontWeight": "600" },
+    "buttonGold": { "bg": "#E8A838", "color": "#16233A", "radius": "12px", "height": "48px" },
+    "card": { "bg": "#FFFFFF", "border": "1px solid rgba(22,35,58,0.08)", "radius": "16px", "shadow": "card" },
+    "badgePaid": { "bg": "rgba(45,106,79,0.12)", "color": "#2D6A4F", "border": "1px solid rgba(45,106,79,0.2)" },
+    "badgePending": { "bg": "rgba(232,168,56,0.14)", "color": "#8A5A00", "border": "1px solid rgba(232,168,56,0.2)" },
+    "monthPill": { "activeBg": "#16233A", "activeColor": "#FFF8E7", "paidBg": "#2D6A4F", "unpaidBg": "#FFF8E7" },
+    "bottomNav": { "height": "64px", "bg": "#FFFFFF", "borderTop": "1px solid rgba(22,35,58,0.08)", "activeColor": "#E8A838" }
+  },
+  "icons": {
+    "bKash": "#E2136E", "Nagad": "#F6921E", "Rocket": "#8E3294", "Bank": "#16233A", "Cash": "#2D6A4F"
+  }
+}

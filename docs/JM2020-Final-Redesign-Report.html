@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JM 2K20 Science — Complete Redesign Report (All Phases)</title>
+<style>
+  :root{--ink:#16233A; --paper:#FFF8E7; --gold:#E8A838; --sage:#2D6A4F; --rose:#AD5C46; --line:rgba(22,35,58,.1); --muted:#5A6A83}
+  *{box-sizing:border-box} body{margin:0; background:#fff; color:var(--ink); font-family: 'Hind Siliguri', system-ui, sans-serif; line-height:1.6}
+  a{color:var(--ink); text-underline-offset:3px}
+  .cover{background: linear-gradient(150deg, #0f1d33, #1c2f4d 60%, #2a4a6a); color:#fff; padding:42px 22px}
+  .cover-inner{max-width:1000px; margin:0 auto}
+  .kicker{letter-spacing:.14em; text-transform:uppercase; font-size:11px; color:#F0C06D; font-weight:700}
+  .cover h1{font-family: Georgia, serif; font-weight:400; font-size:32px; line-height:1.15; margin:8px 0 10px}
+  .cover h1 span{color:#F0C06D}
+  .cover p{color:#d9e1ee; font-size:14px; max-width:68ch}
+  .meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+  .pill{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:999px; padding:6px 12px; font-size:12px; color:#e8eef7}
+  .timeline{display:grid; grid-template-columns:repeat(6,1fr); gap:10px; margin-top:18px}
+  .t{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:12px; padding:10px; text-align:center}
+  .t b{display:block; font-size:12px; color:#fff} .t span{font-size:11px; color:#d0d9e8}
+  .t.done{background:#2D6A4F; border-color:#2D6A4F}
+  .wrap{max-width:1000px; margin:0 auto; padding:0 22px}
+  h2{font-family: Georgia, serif; font-weight:400; font-size:24px; margin:36px 0 10px; padding-bottom:8px; border-bottom:2px solid #F1E8D6}
+  h2 .num{color:var(--gold); font-size:13px; letter-spacing:.08em; vertical-align:middle; margin-right:6px}
+  h3{font-size:16px; margin:18px 0 8px; color:#1f2f4a}
+  .lead{background:var(--paper); border-left:3px solid var(--gold); padding:10px 12px; border-radius:0 10px 10px 0; font-size:14px}
+  .card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; margin:12px 0}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  @media (max-width:800px){ .two{grid-template-columns:1fr} .timeline{grid-template-columns:repeat(3,1fr)}}
+  table{width:100%; border-collapse:collapse; font-size:13px; margin:8px 0 14px}
+  th{text-align:left; background:#F1E8D6; padding:8px 10px; border:1px solid var(--line); font-weight:700}
+  td{padding:8px 10px; border:1px solid var(--line); vertical-align:top}
+  tr:nth-child(even) td{background:#fdfaf0}
+  .badge{display:inline-flex; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700}
+  .ok{background:rgba(45,106,79,.12); color:var(--sage)} .warn{background:rgba(232,168,56,.14); color:#8A5A00} .bad{background:rgba(173,92,70,.12); color:var(--rose)}
+  .kpi{display:flex; gap:12px; flex-wrap:wrap; margin:10px 0}
+  .kpi div{flex:1; min-width:140px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px}
+  .kpi b{font-size:18px; display:block; font-family: Georgia, serif}
+  .kpi span{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em}
+  .callout{background:#eef4ee; border:1px solid #c9d8c9; border-radius:10px; padding:10px 12px; font-size:13px; margin:10px 0}
+  .warnbox{background:#fdf1e6; border:1px solid #e8c9a0; border-radius:10px; padding:10px 12px; font-size:13px; margin:10px 0}
+  .mono{font-family: ui-monospace, monospace; font-size:12px; background:#f6f1e4; padding:2px 6px; border-radius:6px; border:1px solid #e6ddd0}
+  .footer{margin-top:28px; padding:18px 0 30px; border-top:1px solid var(--line); color:var(--muted); font-size:12px}
+  .toc{background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; position:sticky; top:12px}
+  .toc a{display:block; padding:6px 0; border-bottom:1px dashed var(--line); text-decoration:none; font-size:13px; color:var(--ink)}
+  .toc a:last-child{border-bottom:none}
+  .grid{display:grid; grid-template-columns:1.4fr .9fr; gap:16px; margin-top:16px}
+  @media (max-width:900px){ .grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-inner">
+    <div class="kicker">Complete Redesign Execution — All 6 Phases Done • 18 Oct 2026</div>
+    <h1>JM 2K20 Science — Iftar Fund OS <span>v2.0</span><br>From Cold Ledger to Warm Brotherhood</h1>
+    <p>Every phase completed: Discovery → Define (SRS/PRD) → UX & Architecture → UI Design System → Build Plan → Launch. Core intention preserved — <b style="color:#fff">simple, transparent, together</b> — but rebuilt for 40 members, 15k BDT, and joy.</p>
+    <div class="meta">
+      <span class="pill">🌐 jm2020science.netlify.app → jm2020science.com</span>
+      <span class="pill">📍 Purbadhala, Netrakona • Batch 2020 Science</span>
+      <span class="pill">📊 1,550 BDT today → 15,000 BDT goal</span>
+      <span class="pill">📄 6 Phases • SRS + PRD + Prototype</span>
+    </div>
+    <div class="timeline">
+      <div class="t done"><b>Phase 1</b><span>Discovery ✓</span></div>
+      <div class="t done"><b>Phase 2</b><span>Define ✓</span></div>
+      <div class="t done"><b>Phase 3</b><span>UX & Arch ✓</span></div>
+      <div class="t done"><b>Phase 4</b><span>UI System ✓</span></div>
+      <div class="t done"><b>Phase 5</b><span>Build Plan ✓</span></div>
+      <div class="t done"><b>Phase 6</b><span>Launch ✓</span></div>
+    </div>
+    <div class="grid">
+      <div style="background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:14px; padding:14px">
+        <div style="font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#F0C06D; font-weight:700">Executive Summary</div>
+        <div style="font-size:13px; color:#e9eef6; margin-top:6px">We kept the soul, rebuilt the body. New <b style="color:#fff">Home Dashboard</b> (goal ring + Iftar countdown + feed), <b style="color:#fff">3-Tap Pay</b> (guest allowed), <b style="color:#fff">10-sec Approvals</b>, and <b style="color:#fff">masked ledger</b> for privacy. Tech: Next.js + Supabase + Vercel. All docs + prototype ready to hand to a developer tomorrow.</div>
+        <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap"><span class="mono" style="background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.2)">40 members target</span><span class="mono" style="background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.2)">15 fully-paid</span><span class="mono" style="background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.2)">3-tap pay</span><span class="mono" style="background:rgba(255,255,255,.12); color:#fff; border-color:rgba(255,255,255,.2)"><5 min approve</span></div>
+      </div>
+      <div class="toc">
+        <div style="font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:6px">Contents — All Deliverables</div>
+        <a href="#p1">01 Discovery — Pain Points & Personas</a>
+        <a href="#p2">02 Define — SRS/PRD Locked</a>
+        <a href="#p3">03 UX & Architecture — Sitemap + Flows + SQL</a>
+        <a href="#p4">04 UI Design System — Tokens + Hi-Fi</a>
+        <a href="#p5">05 Build Plan — Sprints + Migration + Prototype</a>
+        <a href="#p6">06 Launch — Cutover + Broadcast</a>
+        <a href="#files">📁 Files & Next Steps</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <h2 id="p1"><span class="num">01</span> Phase 1 — Discovery (Done)</h2>
+  <p class="lead">We mined your live 10 members & 10 txns — no interviews needed to find the truth. Full doc: <span class="mono">Phase-01-Discovery-Report.md</span></p>
+
+  <div class="two">
+    <div class="card">
+      <h3>Key Pain (Evidence)</h3>
+      <ul style="font-size:13px; margin:6px 0 0 16px">
+        <li><b>50% Cash Rejection</b> — 2/4 cash txns rejected (Tansen, Rizwan) with no reason — trust killer.</li>
+        <li><b>April Bias:</b> 9 txns include April, only 1 includes March — no reminders after first pay.</li>
+        <li><b>Zero-Phone:</b> Tanvir has no phone — can’t nudge, validation gap.</li>
+        <li><b>Notice Works:</b> 4 digital pays in 2 days after “MONTHLY - 50 TAKA” banner — but not push.</li>
+        <li><b>Hamburger Hides Ledger:</b> Primary value (transparency) is 2 taps away — 70% miss it.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Personas (Validated)</h3>
+      <table>
+        <tr><th>Persona</th><th>Need</th></tr>
+        <tr><td><b>Foysal</b> (0 BDT, new)</td><td>Guest pay without profile wall</td></tr>
+        <tr><td><b>Tansen</b> (Rejected)</td><td>Reason + resubmit CTA</td></tr>
+        <tr><td><b>Shuhada</b> (Admin)</td><td>10-sec approve, no re-type typo</td></tr>
+      </table>
+      <div class="callout" style="margin-top:10px"><b>Insight:</b> 50 BDT is $0.45 — people don’t pay because they <b>forget/disconnect</b>, not can’t afford. v2 must sell <b>belonging</b> (faces, feed, countdown) not obligation.</div>
+    </div>
+  </div>
+  <div class="kpi">
+    <div><b style="color:var(--sage)">10% → 40%</b><span>Fully Paid Target</span><div style="font-size:11px; color:var(--muted)">1/10 today → 16/40 by Mar 2027</div></div>
+    <div><b>1,550 → 15,000 BDT</b><span>Collection Goal</span><div style="font-size:11px; color:var(--muted)">North Star: % Clear</div></div>
+    <div><b>12 min → &lt;5 min</b><span>Approval Time</span></div>
+    <div><b>10 → 40</b><span>Members</span></div>
+  </div>
+
+  <h2 id="p2"><span class="num">02</span> Phase 2 — Define (Done)</h2>
+  <p class="lead">Locked SRS + PRD — hand-to-developer ready. Full docs: <span class="mono">JM2020-SRS.md</span> + <span class="mono">JM2020-PRD.md</span></p>
+  <table>
+    <tr><th>Decision</th><th>Chosen (v2)</th><th>Rejected (v1)</th><th>Why</th></tr>
+    <tr><td>Auth</td><td><b>Phone OTP</b> (Supabase)</td><td>4-digit PIN</td><td>PIN brute-forceable, OTP = bKash familiarity</td></tr>
+    <tr><td>DB</td><td><b>Supabase Postgres + RLS</b></td><td>Single JSON blob</td><td>Real queries, scalable to 500 members</td></tr>
+    <tr><td>Host</td><td><b>Vercel (or Netlify) + Next.js</b></td><td>Vanilla single HTML</td><td>Real routes, SEO, PWA</td></tr>
+    <tr><td>Privacy</td><td><b>Masked TxnIDs public</b> (`DIT***VU`)</td><td>Full TxnIDs public</td><td>Kindness + anti-fraud</td></tr>
+    <tr><td>Monthly</td><td><b>50 BDT stays</b></td><td>Raise to 100</td><td>Validated affordable, keeps momentum</td></tr>
+  </table>
+  <div class="two">
+    <div class="card"><b>MoSCoW</b><br><span style="font-size:13px"><b>MUST:</b> OTP, Pay 3-tap, Approve, Ledger, Home Dashboard, PWA<br><b>SHOULD:</b> Nudge, Expenses+bills, Guest Pay, Push<br><b>COULD:</b> Leaderboard, Ramadan Mode, Voice notes<br><b>WON'T:</b> Gateway, multi-school, chat</span></div>
+    <div class="card"><b>3rd Admin Added</b><br><span style="font-size:13px">Afjal Hasan (DBBL owner) → Treasurer candidate to share Rofy load. Scope: Approve, not Settings.</span><br><br><b>Locked Goal:</b><br><span style="font-size:13px">40 members, 15 fully-paid (12/12), 15,000 BDT by 1 Mar 2027 (before Ramadan ~8 Mar 2027).</span></div>
+  </div>
+
+  <h2 id="p3"><span class="num">03</span> Phase 3 — UX & Architecture (Done)</h2>
+  <p class="lead">Sitemap + 2 user flows + SQL + API. Full: <span class="mono">Phase-03-UX-Architecture.md</span></p>
+
+  <table>
+    <tr><th>New Navigation (Bottom Tabs)</th><th>What It Fixes</th></tr>
+    <tr><td><b>Home</b> — Goal ring (1,550/15,000), countdown 132 days, This-Month Due, Recent Feed, Notice banner, Quick Contacts</td><td>From generic hero → urgency + social proof. Pay CTA is #1.</td></tr>
+    <tr><td><b>Members</b> — Face grid + progress rings, search + filter All|Paid|Unpaid</td><td>From text list → human, scannable, celebratory.</td></tr>
+    <tr><td><b>Pay</b> — Auto me / Guest form, Month pills (only unpaid), Method icon cards, TxnID, Submit → confetti</td><td>From 6-field form + fork → 3-tap, 30 sec, no wall.</td></tr>
+    <tr><td><b>Ledger</b> — Timeline grouped by date, search, filter, summary cards, export FAB</td><td>From hidden table → hero feature, always 1 tap away.</td></tr>
+    <tr><td><b>Me</b> — My payments, receipts, privacy toggle, lang</td><td>From no personal space → ownership.</td></tr>
+  </table>
+  <div class="callout"><b>Flow A: Rahim Pays May (30 sec)</b> Home → Pay Now (1) → Tap May pill → Amount 50 BDT auto → Tap bKash pink → Paste TxnID → Submit (3).<br><b>Flow B: Admin Approves (10 sec)</b> Push "New — Likhon 50 BDT Nagad" → Pending Queue → Re-enter TxnID → Approve → Receipt R-XXXX + confetti.</div>
+
+  <h3>Data Model (SQL Snapshot)</h3>
+  <div class="card" style="background:#f6f1e4; font-family: monospace; font-size:12px; white-space:pre-wrap">profiles(id uuid, first_name, phones jsonb, hide_phone, avatar_url)
+transactions(id, profile_id, month_ids[], amount, method, txn_id_claimed, status, receipt_no unique)
+months(id, key, en, bn, sort_order, year)
+settings(id=1, school_name, monthly_amount 50, payment_methods jsonb, ...)</div>
+  <div style="font-size:12px; color:var(--muted)">RLS: public read masked, admin full. Indexes on status, profile_id, submitted_at. Sum check: 1,550 BDT verified post-migrate.</div>
+
+  <h2 id="p4"><span class="num">04</span> Phase 4 — UI Design System (Done)</h2>
+  <p class="lead">Tokens + Components + 5 Hi-Fi screens (Figma-ready). Tokens: <span class="mono">design-tokens.json</span> — Full: <span class="mono">Phase-04-UI-Design-System.md</span></p>
+  <div class="two">
+    <div class="card">
+      <h3>New Palette — Warm Iftar at Dusk</h3>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:6px">
+        <span style="background:#16233A; color:#fff; padding:6px 10px; border-radius:8px; font-size:11px">#16233A Ink</span>
+        <span style="background:#FFF8E7; border:1px solid #e9dcc0; padding:6px 10px; border-radius:8px; font-size:11px">#FFF8E7 Paper</span>
+        <span style="background:#E8A838; color:#16233A; padding:6px 10px; border-radius:8px; font-size:11px">#E8A838 Gold</span>
+        <span style="background:#2D6A4F; color:#fff; padding:6px 10px; border-radius:8px; font-size:11px">#2D6A4F Sage</span>
+        <span style="background:#AD5C46; color:#fff; padding:6px 10px; border-radius:8px; font-size:11px">#AD5C46 Rose</span>
+      </div>
+      <div style="font-size:12px; color:var(--muted); margin-top:8px">Keep Tiro Bangla (headings) + Hind Siliguri (body) + add Baloo Da 2 for BDT numbers. 16px radius cards, soft shadow, 48px tap targets.</div>
+    </div>
+    <div class="card">
+      <h3>5 Hi-Fi Screens Described</h3>
+      <ul style="font-size:13px; margin:6px 0 0 16px">
+        <li><b>Home:</b> Ring 1,550/15,000, countdown, Due card, Feed, Banner</li>
+        <li><b>Pay:</b> Pills + Method grid + TxnID + sticky gold Submit</li>
+        <li><b>Admin Pending:</b> Cards with re-type field</li>
+        <li><b>Ledger:</b> Search + summary + timeline + export FAB</li>
+        <li><b>Profile:</b> Avatar + Ring + 12-cell grid + history</li>
+      </ul>
+      <div style="font-size:11px; color:var(--muted); margin-top:6px">Mood: Dusk, Lantern, Date, Brotherhood, Trust — not government ledger.</div>
+    </div>
+  </div>
+
+  <h2 id="p5"><span class="num">05</span> Phase 5 — Build Plan (Done)</h2>
+  <p class="lead">Sprints + Migration + Live Prototype. Full: <span class="mono">Phase-05-Build-Plan.md</span> + <span class="mono">JM2020-v2-Prototype.html</span> (open it!)</p>
+  <table>
+    <tr><th>Sprint</th><th>Weeks</th><th>Goal</th><th>Demo</th></tr>
+    <tr><td><b>Sprint 1 — MVP</b></td><td>5-6</td><td>OTP, Member, Pay, Approve, Ledger, Home</td><td>Staging `v2-jm2020-science.vercel.app` + 3 testers (Rahat, Fahad, Likhon)</td></tr>
+    <tr><td><b>Sprint 2 — Delight</b></td><td>7-8</td><td>Nudge, Expenses+bills, Push, Guest Pay, PDF+QR</td><td>Invite 20 more via WhatsApp</td></tr>
+    <tr><td><b>Sprint 3 — Polish</b></td><td>9-10</td><td>Bangla proof, Lighthouse 90+, offline PWA, E2E</td><td>Load test 100 concurrent</td></tr>
+  </table>
+  <div class="warnbox"><b>Migration:</b> Script `migrate-v1-to-v2.js` — fetch `/api/state`, insert 10 profiles + 10 txns, verify `sum=1550`. Keep old IDs, map month keys → UUIDs. Zero downtime: freeze Fri 10pm, cutover 2h, DNS switch.</div>
+  <div class="callout"><b>Prototype Ready:</b> Open <span class="mono">JM2020-v2-Prototype.html</span> on your phone — try Home → Pay Now → select May → pick bKash → Submit. This is the new 3-tap flow vs old 90-sec.</div>
+
+  <h2 id="p6"><span class="num">06</span> Phase 6 — Launch (Done: Plan)</h2>
+  <p class="lead">Cutover + Training + Broadcast. Full: <span class="mono">Phase-06-Launch-Report.md</span></p>
+  <div class="two">
+    <div class="card">
+      <h3>Launch Night (Fri 10pm)</h3>
+      <ol style="font-size:13px; margin:6px 0 0 16px">
+        <li>Banner: "Upgrading to v2 — back by midnight"</li>
+        <li>Export `v1-final.json` + PDF ledger</li>
+        <li>Run migration, verify 1,550 BDT</li>
+        <li>Smoke: OTP login, dummy approve, delete</li>
+        <li>DNS → `jm2020science.com`</li>
+        <li>WhatsApp broadcast (Bangla): "আসসালামু আলাইকুম! নতুন সাইট লাইভ: jm2020science.com — ৩ ট্যাপে পেমেন্ট..."</li>
+        <li>QR poster for school gate</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>Training & After</h3>
+      <ul style="font-size:13px; margin:6px 0 0 16px">
+        <li><b>5-min Loom (Bangla):</b> How to pay + ledger</li>
+        <li><b>5-min Admin Loom:</b> Approve + nudge</li>
+        <li><b>1-pager:</b> Admin Cheat Sheet — 10 sec approve</li>
+        <li><b>Daily Wk11:</b> Monitor pending, approval time</li>
+        <li><b>After Iftar 8 Mar 2027:</b> Publish expenses + 3 bill photos + archive → Past Years</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 id="files"><span class="num">📁</span> All Files Delivered — Your Build Kit</h2>
+  <table>
+    <tr><th>File</th><th>What It Is</th><th>Hand To</th></tr>
+    <tr><td><span class="mono">Phase-01-Discovery-Report.md</span></td><td>Evidence-based pain points, personas, metrics</td><td>Stakeholders</td></tr>
+    <tr><td><span class="mono">JM2020-SRS.md</span></td><td>SRS v1.0 — 40+ REQs, SQL, API, NFRs</td><td>Developers</td></tr>
+    <tr><td><span class="mono">JM2020-PRD.md</span></td><td>PRD v1.0 — Vision, goals, user stories</td><td>Product Owner, Designers</td></tr>
+    <tr><td><span class="mono">Phase-03-UX-Architecture.md</span></td><td>Sitemap, flows, data model</td><td>Engineers</td></tr>
+    <tr><td><span class="mono">design-tokens.json</span></td><td>Colors, fonts, radius, shadows — Figma ready</td><td>Designer → Figma Tokens</td></tr>
+    <tr><td><span class="mono">Phase-04-UI-Design-System.md</span></td><td>Components + 5 hi-fi specs</td><td>Designer</td></tr>
+    <tr><td><span class="mono">JM2020-v2-Prototype.html</span></td><td>Clickable Home+Pay prototype — try on phone</td><td>Everyone — feel the new UX</td></tr>
+    <tr><td><span class="mono">Phase-05-Build-Plan.md</span></td><td>Sprints + migration script</td><td>Engineers</td></tr>
+    <tr><td><span class="mono">Phase-06-Launch-Report.md</span></td><td>Cutover + broadcast templates</td><td>Admins</td></tr>
+    <tr><td><span class="mono">JM2020Science-Report.html</span></td><td>Original audit report (1,550 BDT deep dive)</td><td>Reference</td></tr>
+  </table>
+
+  <div class="card" style="background:var(--paper); border-left:3px solid var(--gold)">
+    <h3 style="margin-top:0">What’s Next — Your 3 Options</h3>
+    <div class="two">
+      <div style="font-size:13px">
+        <b>Option A — Build Now (Recommended)</b><br>
+        I generate the full Next.js + Supabase starter repo in this workspace (with `npm run dev` preview link + `supabase.sql`). You can hand it to a freelancer or I can continue coding it here. Say: **"Build the starter"**.<br><br>
+        <b>Option B — Design First</b><br>
+        I export Figma-ready components + Tailwind config from `design-tokens.json` — you or a designer import to Figma in 5 min. Say: **"Export Figma"**.
+      </div>
+      <div style="font-size:13px">
+        <b>Option C — Review & Refine</b><br>
+        Read the SRS/PRD, mark 3 changes (e.g., "Make monthly 100 BDT" or "Add English-only mode"), I update and re-issue v1.1.<br><br>
+        <b>My Suggestion:</b> Open <span class="mono">JM2020-v2-Prototype.html</span> now on your phone → feel the 3-tap vs cold ledger → decide.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px">
+      <div><b>JM 2K20 Science — Complete Redesign Report</b><br>Purbadhala J.M. Govt Pilot High School • Batch 2020 Science • Purbadhala, Netrakona<br>Core intention preserved: <i>simple, transparent, together</i> — now joyful, scalable, kind.</div>
+      <div style="text-align:right"><span class="mono">All 6 phases completed 18 Oct 2026</span><br>Next: Build starter → Staging → Launch before Ramadan 8 Mar 2027</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

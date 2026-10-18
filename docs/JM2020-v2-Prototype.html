@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JM 2020 v2 Prototype — Home + Pay</title>
+<style>
+  :root{--ink:#16233A; --paper:#FFF8E7; --gold:#E8A838; --sage:#2D6A4F; --rose:#AD5C46; --line:rgba(22,35,58,.08); --muted:#5A6A83}
+  *{box-sizing:border-box} body{margin:0; font-family:'Hind Siliguri', system-ui, sans-serif; background:var(--paper); color:var(--ink); -webkit-font-smoothing:antialiased}
+  .phone{max-width:390px; margin:0 auto; background:#fff; min-height:100vh; border:1px solid var(--line); position:relative; padding-bottom:72px}
+  .top{height:60px; display:flex; align-items:center; justify-content:space-between; padding:0 14px; border-bottom:1px solid var(--line); background:#fff; position:sticky; top:0; z-index:10}
+  .brand{display:flex; gap:10px; align-items:center} .brand img{width:36px; height:36px; border-radius:9px; background:#fff; border:1px solid var(--line); object-fit:contain; padding:3px}
+  .brand b{font-size:13px; line-height:1.2} .brand span{font-size:10px; color:var(--muted)}
+  .pill{border:1px solid var(--line); background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:600}
+  .hero{padding:16px 14px 10px; background:var(--paper); text-align:center}
+  .ring{width:132px; height:132px; border-radius:50%; margin:0 auto; background: conic-gradient(var(--gold) 10%, #e8ddd0 10%); display:flex; align-items:center; justify-content:center; position:relative}
+  .ring::before{content:""; position:absolute; inset:14px; background:#fff; border-radius:50%}
+  .ring div{position:relative; z-index:1; text-align:center} .ring b{font-size:20px; display:block} .ring span{font-size:11px; color:var(--muted)}
+  .count{margin-top:10px; display:inline-flex; gap:6px; align-items:center; background:#fff; border:1px solid var(--line); border-radius:999px; padding:6px 12px; font-size:12px}
+  .card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px; margin:12px 14px; box-shadow:0 4px 20px rgba(22,35,58,.06)}
+  .due{display:flex; align-items:center; justify-content:space-between}
+  .due b{font-size:15px} .due span{font-size:12px; color:var(--muted)}
+  .btn{border:none; background:var(--ink); color:#fff; padding:11px 16px; border-radius:12px; font-weight:700; cursor:pointer; width:100%}
+  .btn.gold{background:var(--gold); color:var(--ink)}
+  .btn:active{transform:scale(.98)}
+  .feed{padding:0 14px} .feed h4{font-size:12px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin:14px 0 8px}
+  .row{display:flex; gap:10px; align-items:center; padding:10px 0; border-bottom:1px solid var(--line); font-size:13px}
+  .ava{width:32px; height:32px; border-radius:50%; background:var(--paper); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; flex:none}
+  .row b{font-size:13px} .row small{font-size:11px; color:var(--muted)}
+  .banner{margin:10px 14px; background:#fef3d6; border:1px solid #f0d58a; border-radius:12px; padding:10px 12px; font-size:13px; display:flex; justify-content:space-between; align-items:center}
+  .nav{position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:390px; height:64px; background:#fff; border-top:1px solid var(--line); display:flex; justify-content:space-around; align-items:center; padding-bottom:env(safe-area-inset-bottom)}
+  .nav button{border:none; background:none; font-size:11px; color:var(--muted); display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; padding:6px 10px; border-radius:10px}
+  .nav button.active{color:var(--ink); font-weight:700} .nav button i{font-size:18px; font-style:normal}
+  .view{display:none} .view.active{display:block}
+  /* Pay */
+  .step{padding:14px} .pill-month{border:1px solid var(--line); background:#fff; padding:8px 12px; border-radius:999px; font-size:12px; margin:4px 6px 4px 0; display:inline-block; cursor:pointer}
+  .pill-month.sel{background:var(--ink); color:#fff; border-color:var(--ink)} .pill-month.paid{background:var(--sage); color:#fff; border-color:var(--sage)}
+  .methods{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px}
+  .method{border:1px solid var(--line); background:#fff; border-radius:14px; padding:12px; text-align:left; cursor:pointer}
+  .method.sel{border-color:var(--gold); background:#fff7e6} .method b{display:block; font-size:13px} .method span{font-size:11px; color:var(--muted)}
+  .amount-bar{position:sticky; bottom:64px; background:var(--ink); color:#fff; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; margin:14px -14px -14px; }
+  .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:78px; background:var(--ink); color:#fff; padding:10px 14px; border-radius:999px; font-size:13px; display:none}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="top">
+    <div class="brand">
+      <img src="data:image/png;base64,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"/>
+      <div><b>Purbadhala J.M. Govt Pilot</b><span>Purbadhala, Netrakona</span></div>
+    </div>
+    <div class="pill">বাংলা</div>
+  </div>
+
+  <!-- VIEW HOME -->
+  <div id="v-home" class="view active">
+    <div class="hero">
+      <div class="ring"><div><b>1,550 BDT</b><span>of 15,000 goal</span></div></div>
+      <div class="count">🕌 132 days to Iftar 2027 — 8 Mar</div>
+    </div>
+    <div class="card due">
+      <div><b>October — 50 BDT due</b><span>6 of 10 paid • 4 pending</span></div>
+      <button class="btn gold" onclick="go('pay')" style="width:auto; padding:9px 18px">Pay Now</button>
+    </div>
+    <div class="banner">📢 MONTHLY - 50 TAKA <span onclick="this.parentElement.style.display='none'" style="cursor:pointer">✕</span></div>
+    <div class="feed">
+      <h4>Recent Activity</h4>
+      <div class="row"><div class="ava">SL</div><div><b>Shuhada approved Likhon’s Nagad</b><small> • 50 BDT • 2h ago</small></div></div>
+      <div class="row"><div class="ava">ST</div><div><b>Shuaib paid Apr–May via bKash</b><small> • 100 BDT • 1d ago</small></div></div>
+      <div class="row"><div class="ava">AF</div><div><b>Abdullah paid May–Sep (5 mos)</b><small> • 250 BDT • 1d ago</small></div></div>
+    </div>
+    <div class="card" style="display:flex; gap:10px; align-items:center; margin-top:14px">
+      <div style="flex:1"><b style="font-size:13px">Need help?</b><br><span style="font-size:12px; color:var(--muted)">ROFY • +880 1994-328869</span></div>
+      <a href="tel:+8801994328869" style="border:1px solid var(--line); padding:8px 12px; border-radius:10px; text-decoration:none; color:var(--ink); font-size:12px">Call</a>
+      <a href="https://wa.me/+8801994328869" style="background:#25D366; color:#fff; padding:8px 12px; border-radius:10px; text-decoration:none; font-size:12px">WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- VIEW PAY -->
+  <div id="v-pay" class="view">
+    <div class="step">
+      <a href="#" onclick="go('home'); return false" style="font-size:13px; text-decoration:none; color:var(--muted)">← Home</a>
+      <h3 style="margin:8px 0 6px">Make a Payment</h3>
+      <div style="font-size:12px; color:var(--muted); background:var(--paper); padding:8px 10px; border-radius:10px">Paying as: <b>Mohammad Rahat</b> • 01960012929 <a href="#">Change</a></div>
+      <h4 style="margin:14px 0 6px; font-size:13px">Select months — 50 BDT each</h4>
+      <div id="pills">
+        <span class="pill-month paid">Apr ✓</span>
+        <span class="pill-month sel" data-m="May">May</span>
+        <span class="pill-month" data-m="Jun">Jun</span>
+        <span class="pill-month" data-m="Jul">Jul</span>
+        <span class="pill-month" data-m="Aug">Aug</span>
+        <span class="pill-month" data-m="Sep">Sep</span>
+        <span class="pill-month" data-m="Oct">Oct</span>
+      </div>
+      <h4 style="margin:14px 0 6px; font-size:13px">How will you pay?</h4>
+      <div class="methods">
+        <button class="method sel" data-pay="bKash"><b>💗 bKash</b><span>01638820094</span></button>
+        <button class="method" data-pay="Nagad"><b>🧡 Nagad</b><span>01638820094</span></button>
+        <button class="method" data-pay="Rocket"><b>💜 Rocket</b><span>019943288692</span></button>
+        <button class="method" data-pay="Cash"><b>💵 Cash</b><span>To ROFY/SHUHADA</span></button>
+      </div>
+      <div style="margin-top:14px" id="txnBox">
+        <label style="font-size:12px; font-weight:600">bKash Transaction ID</label>
+        <input id="txn" placeholder="e.g., DIT84TPYVU" style="width:100%; margin-top:6px; padding:11px 12px; border-radius:10px; border:1px solid var(--line); font-size:14px">
+        <div style="font-size:11px; color:var(--muted); margin-top:4px">Found in your bKash SMS confirmation.</div>
+      </div>
+      <div class="amount-bar"><div><b id="amt">50 BDT</b><div style="font-size:11px; opacity:.8" id="amtDetail">1 month selected</div></div><button class="btn" onclick="submitPay()" style="background:#fff; color:var(--ink); width:auto; padding:9px 18px">Submit</button></div>
+    </div>
+  </div>
+
+  <!-- VIEW LEDGER -->
+  <div id="v-ledger" class="view">
+    <div style="padding:14px">
+      <h3 style="margin:0">Full Accounts</h3>
+      <input placeholder="Search name, receipt..." style="width:100%; margin:10px 0; padding:10px 12px; border-radius:10px; border:1px solid var(--line); font-size:13px">
+      <div style="display:flex; gap:8px; margin-bottom:12px"><span class="pill-month sel">All</span><span class="pill-month">Approved</span><span class="pill-month">Pending</span><span class="pill-month">Rejected</span></div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:12px">
+        <div class="card" style="margin:0; padding:10px; text-align:center"><b>1,550 BDT</b><div style="font-size:11px; color:var(--muted)">Total</div></div>
+        <div class="card" style="margin:0; padding:10px; text-align:center"><b>0</b><div style="font-size:11px; color:var(--muted)">Pending</div></div>
+        <div class="card" style="margin:0; padding:10px; text-align:center"><b>10</b><div style="font-size:11px; color:var(--muted)">Members</div></div>
+      </div>
+      <div class="card" style="margin:0"><div style="font-size:12px; color:var(--muted)">Today — 18 Oct</div><div class="row"><div class="ava">RL</div><div><b>Raisul Likhon</b> • Apr • 50 BDT • Nagad<br><small>R-3Q843V • Approved by Shuhada • 08:12</small></div></div></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Submitted! Pending approval ⏳</div>
+
+  <div class="nav">
+    <button class="active" onclick="go('home',this)"><i>🏠</i>Home</button>
+    <button onclick="go('members',this)"><i>👥</i>Members</button>
+    <button onclick="go('pay',this)"><i>💳</i>Pay</button>
+    <button onclick="go('ledger',this)"><i>📒</i>Ledger</button>
+    <button onclick="go('me',this)"><i>👤</i>Me</button>
+  </div>
+</div>
+<script>
+  function go(id, el){
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    const t=document.getElementById('v-'+id);
+    if(t) t.classList.add('active');
+    else { document.getElementById('v-home').classList.add('active'); alert('Members/Me screens in full app — this is a preview of Home+Pay+Ledger'); }
+    if(el){ document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active')); el.classList.add('active'); }
+  }
+  document.querySelectorAll('#pills .pill-month[data-m]').forEach(p=>{
+    p.addEventListener('click', ()=>{
+      if(p.classList.contains('paid')) return;
+      p.classList.toggle('sel');
+      const n=document.querySelectorAll('#pills .pill-month.sel').length;
+      document.getElementById('amt').textContent=(n*50)+' BDT';
+      document.getElementById('amtDetail').textContent=n+' month'+(n!=1?'s':'')+' selected';
+    });
+  });
+  document.querySelectorAll('.method').forEach(m=>{
+    m.addEventListener('click', ()=>{
+      document.querySelectorAll('.method').forEach(x=>x.classList.remove('sel'));
+      m.classList.add('sel');
+      document.querySelector('#txnBox label').textContent=m.dataset.pay+' Transaction ID';
+    });
+  });
+  function submitPay(){
+    const v=document.getElementById('txn').value.trim();
+    if(!v){ alert('Enter Transaction ID'); return; }
+    const t=document.getElementById('toast');
+    t.style.display='block';
+    setTimeout(()=>t.style.display='none',2400);
+  }
+</script>
+</body>
+</html>
